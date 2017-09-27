@@ -9,7 +9,7 @@ class NvrCamDiscovery
   end
 
   def ipcams
-    client = RestClient.get("#{@nvr_url}/api/2.0/camera?apiKey=#{@api_key}")
+    client = RestClient::Request.execute(url: "#{@nvr_url}/api/2.0/camera?apiKey=#{@api_key}", method: :get, verify_ssl: false)
     nvr_data = JSON.parse(client)
     cam_names = { 'data' => [] }
     nvr_data['data'].each { |cam| cam_names['data'] << { "{#CAMNAME}" => cam['name'] } }
