@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <zabbix_export>
     <version>3.0</version>
-    <date>2017-06-30T08:12:03Z</date>
+    <date>2017-11-16T13:40:06Z</date>
     <groups>
         <group>
             <name>NVR</name>
@@ -63,7 +63,7 @@
                             <snmp_community/>
                             <multiplier>0</multiplier>
                             <snmp_oid/>
-                            <key>nvr.cam_alive[{#CAMNAME}]</key>
+                            <key>nvr.cam_alive[{#CAMUID}]</key>
                             <delay>30</delay>
                             <history>90</history>
                             <trends>365</trends>
@@ -107,7 +107,7 @@
                             <snmp_community/>
                             <multiplier>0</multiplier>
                             <snmp_oid/>
-                            <key>nvr.cam_last_record[{#CAMNAME}]</key>
+                            <key>nvr.cam_last_record[{#CAMUID}]</key>
                             <delay>30</delay>
                             <history>90</history>
                             <trends>365</trends>
@@ -148,7 +148,7 @@
                     </item_prototypes>
                     <trigger_prototypes>
                         <trigger_prototype>
-                            <expression>{Unifi Video:nvr.cam_alive[{#CAMNAME}].last()}&lt;&gt;1</expression>
+                            <expression>{Unifi Video:nvr.cam_alive[{#CAMUID}].last()}&lt;&gt;1</expression>
                             <name>NVR {#CAMNAME} down</name>
                             <url/>
                             <status>0</status>
@@ -158,7 +158,7 @@
                             <dependencies/>
                         </trigger_prototype>
                         <trigger_prototype>
-                            <expression>{Unifi Video:nvr.cam_last_record[{#CAMNAME}].last()}&gt;10</expression>
+                            <expression>{Unifi Video:nvr.cam_last_record[{#CAMUID}].last()}&gt;10</expression>
                             <name>NVR {#CAMNAME} no video in last 10 minutes</name>
                             <url/>
                             <status>0</status>

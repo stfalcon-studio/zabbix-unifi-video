@@ -8,11 +8,11 @@ class NvrCamAlive
     @api_key = api_key
   end
 
-  def cam_alive(cam_name)
+  def cam_alive(cam_uid)
     client = RestClient::Request.execute(url: "#{@nvr_url}/api/2.0/camera?apiKey=#{@api_key}", method: :get, verify_ssl: false)
     nvr_data = JSON.parse(client)
     nvr_data['data'].each do |cam|
-      if cam['name'] == cam_name
+      if cam['uuid'] == cam_uid
         if cam['state'] == 'CONNECTED'
           return '1'
         else

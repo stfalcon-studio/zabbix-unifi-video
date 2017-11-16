@@ -12,7 +12,7 @@ class NvrCamDiscovery
     client = RestClient::Request.execute(url: "#{@nvr_url}/api/2.0/camera?apiKey=#{@api_key}", method: :get, verify_ssl: false)
     nvr_data = JSON.parse(client)
     cam_names = { 'data' => [] }
-    nvr_data['data'].each { |cam| cam_names['data'] << { "{#CAMNAME}" => cam['name'] } }
+    nvr_data['data'].each { |cam| cam_names['data'] << { "{#CAMNAME}" => cam['name'], "{#CAMUID}" => cam['uuid'] } if cam['managed'] == true }
     cam_names.to_json
   end
 

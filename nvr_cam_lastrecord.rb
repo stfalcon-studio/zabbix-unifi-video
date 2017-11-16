@@ -8,11 +8,11 @@ class NvrCamLastRecord
     @api_key = api_key
   end
 
-  def cam_last_record(cam_name)
+  def cam_last_record(cam_uid)
     client = RestClient::Request.execute(url: "#{@nvr_url}/api/2.0/camera?apiKey=#{@api_key}", method: :get, verify_ssl: false)
     nvr_data = JSON.parse(client)
     nvr_data['data'].each do |cam|
-      if cam['name'] == cam_name
+      if cam['uuid'] == cam_uid
         return ((Time.now - Time.strptime(cam['lastRecordingStartTime'].to_s, '%Q')) / 60 ).to_i
       end
     end
